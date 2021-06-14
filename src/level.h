@@ -3,6 +3,11 @@
 
 #include <raylib.h>
 
+typedef struct  {
+    char* name;
+    int score;
+}score;
+
 typedef struct {
     // Size of the level (and the block matrix)
     int size_y, size_x;
@@ -16,8 +21,9 @@ typedef struct {
     Texture2D texture;
     // Name of the level
     const char* name;
-    int high_scores;
+    score high_scores;
 } level;
+
 
 // Load a level from an image file
 level *level_load(const char *fname,const char *names, int size_y, int size_x);

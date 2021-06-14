@@ -35,7 +35,7 @@ void state_draw(const state *state){
     DrawText(message,LEVEL_SIZE_X/2-text_width/2+rx,LEVEL_SIZE_Y+20+ry,MESSAGE_FONT_SIZE,WHITE);
     
     //Draw score
-    DrawText(TextFormat("HI-SCORE: %i", state->level->high_scores), LEVEL_SIZE_X+8, 10, 30, MAROON);
+    DrawText(TextFormat("HI-SCORE: %i", state->level->high_scores.score), LEVEL_SIZE_X+8, 10, 30, MAROON);
     DrawText(TextFormat("SCORE: %i", state->ball.block), LEVEL_SIZE_X+8, 50, 17, BLACK);
     DrawText(TextFormat("Glue: %i", state->ball.glue), LEVEL_SIZE_X+8, 80,17, BLACK);
     DrawText(TextFormat("Safety floor: %i", state->ball.safety), LEVEL_SIZE_X+8, 110,17, BLACK);
