@@ -15,7 +15,7 @@ typedef struct {
     // Speed
     float spd_x,spd_y;
     // Cooldown
-    int glue,safety;
+    int glue,safety, block;
 } ball;
 
 typedef enum {
@@ -41,7 +41,7 @@ typedef struct {
 
 
 // Allocates and initializes a new state
-state *state_new(const char *fname);
+state *state_new(const char *fname, const char *names);
 
 // Moves the state one frame forward in time
 void state_update(state *sta);

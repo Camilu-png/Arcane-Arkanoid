@@ -14,10 +14,13 @@ typedef struct {
     Image image;
     // Current texture (stored in GPU)
     Texture2D texture;
+    // Name of the level
+    const char* name;
+    int high_scores;
 } level;
 
 // Load a level from an image file
-level *level_load(const char *fname, int size_y, int size_x);
+level *level_load(const char *fname,const char *names, int size_y, int size_x);
 
 // Get the block_id of a given pixel
 int level_get_block_id(const level *lev, int y, int x);

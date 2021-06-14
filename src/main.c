@@ -20,11 +20,13 @@ int main(int argc, const char *args[]){
 
     // All levels
     const char* levels[4] = {"levels/marcianito_100_real.png","levels/cerebro.png","levels/shrek.png","levels/robi.png"};
-    
+    const char* names[4] = {"Marcianito 100% real","Cerebro","Shrek","Robi"};
+    int index_level = 0;
 
     while (!WindowShouldClose()){
         // Load level image
-        state *sta = state_new(levels[0]);
+        state *sta = state_new(levels[index_level], names[index_level]);
+        
 
         // The game should restart?
         int restart = 0;
@@ -42,29 +44,19 @@ int main(int argc, const char *args[]){
                 
             }
             else if(IsKeyPressed(KEY_F1)){
-                sta = state_new(levels[0]);
+                if(index_level < 3){
+                    index_level += 1;
+                    sta = state_new(levels[index_level], names[index_level]);
+                }
+                else{
+                    index_level = 0;
+                    sta = state_new(levels[index_level], names[index_level]);
+                }
+                
                 state_update(sta);
                 StopSound(music);
                 PlaySound(music);
             }
-            else if (IsKeyPressed(KEY_F2)){
-                sta = state_new(levels[1]);
-                state_update(sta);
-                StopSound(music);
-                PlaySound(music);
-            }
-            else if (IsKeyPressed(KEY_F3)){
-                sta = state_new(levels[2]);
-                state_update(sta);
-                StopSound(music);
-                PlaySound(music);
-            }
-            else if (IsKeyPressed(KEY_F4)){
-                sta = state_new(levels[3]);
-                state_update(sta);
-                StopSound(music);
-                PlaySound(music);
-            }            
 
             // Draw
             //----------------------------------------------------------------------------------

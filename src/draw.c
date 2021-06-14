@@ -27,7 +27,6 @@ void state_draw(const state *state){
     }else if(state->status==STATUS_GAMEOVER){
         message = "GAME OVER";
     }
-        // message = state->fname;
 
     // Center text message
     int text_width = MeasureText(message,MESSAGE_FONT_SIZE);
@@ -36,8 +35,9 @@ void state_draw(const state *state){
     DrawText(message,LEVEL_SIZE_X/2-text_width/2+rx,LEVEL_SIZE_Y+20+ry,MESSAGE_FONT_SIZE,WHITE);
     
     //Draw score
-    DrawText(TextFormat("SCORE: %i", 10), LEVEL_SIZE_X+8, 130, 20, MAROON);
-    DrawText(TextFormat("HI-SCORE: %i", 10), LEVEL_SIZE_X+8, 200, 30, BLACK);
-    DrawText(TextFormat("Glue: %i", state->ball.glue), LEVEL_SIZE_X+8, 230,15, BLACK);
-    DrawText(TextFormat("Safety floor: %i", state->ball.safety), LEVEL_SIZE_X+8, 245,15, BLACK);
+    DrawText(TextFormat("HI-SCORE: %i", state->level->high_scores), LEVEL_SIZE_X+8, 10, 30, MAROON);
+    DrawText(TextFormat("SCORE: %i", state->ball.block), LEVEL_SIZE_X+8, 50, 17, BLACK);
+    DrawText(TextFormat("Glue: %i", state->ball.glue), LEVEL_SIZE_X+8, 80,17, BLACK);
+    DrawText(TextFormat("Safety floor: %i", state->ball.safety), LEVEL_SIZE_X+8, 110,17, BLACK);
+    DrawText(TextFormat("%s", state->level->name), LEVEL_SIZE_X+8, 140,22, BLACK);
 }

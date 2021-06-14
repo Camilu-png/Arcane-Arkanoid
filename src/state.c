@@ -20,13 +20,13 @@ int distance_x;
 double time_previous;
 
 // Allocates and initializes a new state
-state *state_new(const char *fname){
+state *state_new(const char *fname, const char *names){
     state *sta = malloc(sizeof(state));
     assert(sta!=NULL);
 
     sta->status = STATUS_WAITING;
 
-    sta->level = level_load(fname,LEVEL_SIZE_Y,LEVEL_SIZE_X);
+    sta->level = level_load(fname, names,LEVEL_SIZE_Y,LEVEL_SIZE_X);
     // Center palette
     sta->palette.x = LEVEL_SIZE_X/2 - INITIAL_PALETTE_WIDTH/2;
     sta->palette.y = SCREEN_HEIGHT - INITIAL_PALETTE_HEIGHT*3/2;
@@ -151,6 +151,7 @@ void ball_update(state *sta, ball *ball){
                     // Destroy the block
                     level_delete_a_block(sta->level,block_id);
                     PlaySound(bum);
+                    sta->ball.block += 1;
                     // Increase collisions
                     if(dx==-ball->rad) col_lef = 1;
                     if(dx==+ball->rad) col_rig = 1;

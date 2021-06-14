@@ -38,14 +38,22 @@ void flood_fill(level *lev, Color *pixels, int cy, int cx, int value){
 
 
 // Load a level from an image file
-level *level_load(const char *fname, int size_y, int size_x){
+level *level_load(const char *fname, const char *names, int size_y, int size_x){
     // Initialize new level
     level *lev = malloc(sizeof(level));
     assert(lev!=NULL);
     memset(lev,0,sizeof(level));
-
+    lev->name = names;
     lev->size_x = size_x;
     lev->size_y = size_y;
+    //High Score
+    // text = fopen("levels/scores.txt", "rt");
+    if(strcmp(names, "Marcianito 100% real")==0){
+        lev->high_scores = 3;
+        }
+    if(strcmp(names, "Cerebro")==0)lev->high_scores = 10;
+    if(strcmp(names, "Shrek")==0)lev->high_scores = 5;
+    if(strcmp(names, "Robi")==0)lev->high_scores = 20;
 
     // Allocate block_id matrix
     lev->block_id = malloc(sizeof(int *)*size_y);
