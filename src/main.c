@@ -22,6 +22,7 @@ int main(int argc, const char *args[]){
     const char* levels[4] = {"levels/marcianito_100_real.png","levels/cerebro.png","levels/shrek.png","levels/robi.png"};
     const char* names[4] = {"Marcianito 100% real","Cerebro","Shrek","Robi"};
     int index_level = 0;
+    // score* text = read("levels/scores.txt");
 
     while (!WindowShouldClose()){
         // Load level image

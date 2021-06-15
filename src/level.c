@@ -36,32 +36,7 @@ void flood_fill(level *lev, Color *pixels, int cy, int cx, int value){
     }
 }
 
-score *read(char* PATH){
-    // FILE* text = fopen(PATH, "r");
-    // char bufer[1000];
-    score* new_text = malloc(20*sizeof(score));
-    // int index = 0;
-    // int kuru = 0;
-    // score new;
-    // while (fgets(bufer, 1000, text)){
-    //     strtok(bufer, "\n");
-    //     if(index==0||index==12||index==18||index==6){
-    //         kuru += 1;
-    //         index++;
-    //         continue;
-    //     }
-    //     else{
-    //         // char *token = strtok(bufer, " - ");
-    //         // new.name = &token[0];
-    //         // new.score = token[1]-'0';
-    //         printf("ALgo");
-    //         // new_text[index-kuru] = &new; 
-    //     }
-    //     index++;
-    // }
-    // fclose(text);
-    return new_text;
-}
+
 // Load a level from an image file
 level *level_load(const char *fname, const char *names, int size_y, int size_x){
     // Initialize new level
@@ -72,11 +47,7 @@ level *level_load(const char *fname, const char *names, int size_y, int size_x){
     lev->size_x = size_x;
     lev->size_y = size_y;
     //High Score
-    // score* text = read("levels/scores.txt");
-    
-    if(strcmp(names, "Marcianito 100% real")==0){
-        lev->high_scores.score = 4;//text[1].score;
-        }
+    if(strcmp(names, "Marcianito 100% real")==0)lev->high_scores.score = 10;
     if(strcmp(names, "Cerebro")==0)lev->high_scores.score = 10;
     if(strcmp(names, "Shrek")==0)lev->high_scores.score = 5;
     if(strcmp(names, "Robi")==0)lev->high_scores.score = 20;

@@ -26,7 +26,7 @@ state *state_new(const char *fname, const char *names){
 
     sta->status = STATUS_WAITING;
 
-    sta->level = level_load(fname, names,LEVEL_SIZE_Y,LEVEL_SIZE_X);
+    sta->level = level_load(fname, names, LEVEL_SIZE_Y, LEVEL_SIZE_X);
     // Center palette
     sta->palette.x = LEVEL_SIZE_X/2 - INITIAL_PALETTE_WIDTH/2;
     sta->palette.y = SCREEN_HEIGHT - INITIAL_PALETTE_HEIGHT*3/2;
@@ -41,7 +41,25 @@ state *state_new(const char *fname, const char *names){
 
     return sta;
 }
-
+// score* read(char* PATH){
+//     score* new_text[5];
+//     FILE* text = fopen(PATH, "r");
+//     char *bufer[5];
+//     int index = 0;
+//     printf("\nTODO\n");
+//     while (fgets(bufer,sizeof(bufer),text) != EOF){
+//         printf("\nLo intenté\n");
+//         printf("line-%i: %s", index, bufer);
+//         strtok(bufer, "\n");
+//         // char *token = strtok(bufer, " - ");
+//         new_text[index]->name = "fabian";//&token[0];
+//         new_text[index]->score =  4;//token[1]-'0';
+//         index++;
+//     }
+//     printf("\nTODO\n");
+//     fclose(text);
+//     return *new_text;
+// }
 void ball_update(state *sta, ball *ball){
 
     // Remaining movement of the ball in this frame
@@ -189,7 +207,7 @@ void state_update(state *sta){
     }
 
     // Game over detection
-    if(IsKeyDown(KEY_C) && sta->ball.safety==0 && sta->ball.y > SCREEN_HEIGHT){
+    if(IsKeyDown(KEY_C) && sta->ball.safety==0 && sta->ball.y > SCREEN_HEIGHT && sta->status != STATUS_GAMEOVER){
         time_previous = GetTime();
         // Move ball up
         sta->ball.y = SCREEN_HEIGHT - sta->ball.rad - 1;
@@ -199,9 +217,11 @@ void state_update(state *sta){
     }
     else if(sta->ball.y > SCREEN_HEIGHT){
         sta->status = STATUS_GAMEOVER;
-        if(sta->ball.y == SCREEN_HEIGHT+1){
-            PlaySound(gameover);
-        }
+        if(sta->ball.y == SCREEN_HEIGHT)PlaySound(gameover);
+        // if(sta->ball.y == SCREEN_HEIGHT+12){
+        //     sta->ball.spd_y=0;
+        //     sta->ball.spd_x=0;
+        // }
     }
     double time_now = GetTime();
     if(sta->ball.safety>0 && abs(time_now-time_previous)>=1.0){
@@ -215,13 +235,9 @@ void state_update(state *sta){
     if(IsKeyDown(KEY_RIGHT)) sta->palette.x += PALETTE_SPEED_X;
     if(IsKeyPressed(KEY_LEFT)) sta->palette.x += (PALETTE_SPEED_X+1)/2;
     if(IsKeyPressed(KEY_RIGHT)) sta->palette.x -= (PALETTE_SPEED_X+1)/2;
-    if(sta->palette.x<0){
-        sta->palette.x = 0;
-    }
-    if(sta->palette.x > LEVEL_SIZE_X - sta->palette.width){
-        sta->palette.x = LEVEL_SIZE_X - sta->palette.width;
-    }
-
+    if(sta->palette.x<0) sta->palette.x = 0;
+    if(sta->palette.x > LEVEL_SIZE_X - sta->palette.width) sta->palette.x = LEVEL_SIZE_X - sta->palette.width;
+    
     // Update ball
     ball_update(sta,&sta->ball);
 }

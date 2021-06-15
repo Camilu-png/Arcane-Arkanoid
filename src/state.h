@@ -38,7 +38,8 @@ typedef struct {
     ball ball;
 } state;
 
-
+// //Read the scores
+// score* read(char* PATH);
 
 // Allocates and initializes a new state
 state *state_new(const char *fname, const char *names);
